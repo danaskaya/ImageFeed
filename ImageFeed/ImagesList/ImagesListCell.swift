@@ -1,4 +1,5 @@
 import UIKit
+
 final class ImagesListCell: UITableViewCell {
     @IBOutlet var likeButton: UIButton!
     @IBOutlet var imageCell: UIImageView!

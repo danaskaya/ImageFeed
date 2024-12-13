@@ -6,7 +6,8 @@
 //
 
 import UIKit
-class SingleImageViewController: UIViewController {
+
+final class SingleImageViewController: UIViewController {
     var image: UIImage? {
         didSet {
             guard isViewLoaded, let image else { return }
@@ -17,7 +18,7 @@ class SingleImageViewController: UIViewController {
     }
     @IBOutlet private var imageView: UIImageView!
     
-    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet private var scrollView: UIScrollView!
     @IBAction private func didTapBackButton() {
             dismiss(animated: true, completion: nil)
         }
@@ -46,7 +47,7 @@ class SingleImageViewController: UIViewController {
         let y = (newContentSize.height - visibleRectSize.height) / 2
         scrollView.setContentOffset(CGPoint(x: x, y: y), animated: false)
     }
-    @IBAction func didTapShareButton() {
+    @IBAction private func didTapShareButton() {
         guard let image else { return }
         let share = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         present(share, animated: true, completion: nil)
