@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="O7g-70-UMX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3Cu-Ik-Qa4">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -121,7 +121,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="ROo-el-NrR">
             <objects>
-                <tabBarController id="O7g-70-UMX" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" id="O7g-70-UMX" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OiE-25-TJ1">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -323,6 +323,10 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="QLr-TA-3PU">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="4"/>
+                                <color key="progressTintColor" name="YP Black"/>
+                            </progressView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OP1-zf-Xc0">
                                 <rect key="frame" x="0.0" y="0.0" width="64" height="44"/>
                                 <constraints>
@@ -331,6 +335,7 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="nav_back_button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="nav_back_button"/>
                                 <connections>
                                     <action selector="didTapBackButton:" destination="EvQ-5g-5BR" eventType="touchUpInside" id="XOh-69-RkC"/>
                                 </connections>
@@ -340,6 +345,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="OP1-zf-Xc0" firstAttribute="top" secondItem="mPa-br-gil" secondAttribute="top" id="7aO-hc-j3D"/>
+                            <constraint firstItem="QLr-TA-3PU" firstAttribute="leading" secondItem="mPa-br-gil" secondAttribute="leading" id="Qp7-oj-iMW"/>
+                            <constraint firstItem="mPa-br-gil" firstAttribute="trailing" secondItem="QLr-TA-3PU" secondAttribute="trailing" id="V12-WG-gdm"/>
+                            <constraint firstItem="QLr-TA-3PU" firstAttribute="top" secondItem="mPa-br-gil" secondAttribute="top" id="aLc-uY-fyT"/>
                             <constraint firstItem="iYM-8q-mVy" firstAttribute="top" secondItem="3kp-Ri-Pxl" secondAttribute="top" id="fGm-tN-PRp"/>
                             <constraint firstItem="iYM-8q-mVy" firstAttribute="leading" secondItem="3kp-Ri-Pxl" secondAttribute="leading" id="mZo-Q7-ZWw"/>
                             <constraint firstAttribute="bottom" secondItem="iYM-8q-mVy" secondAttribute="bottom" id="pyF-Lq-oRm"/>
@@ -349,6 +357,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Nwa-JP-Vgw"/>
                     <connections>
+                        <outlet property="progressView" destination="QLr-TA-3PU" id="j0W-dB-uZx"/>
                         <outlet property="webView" destination="iYM-8q-mVy" id="MnI-7S-TDy"/>
                     </connections>
                 </viewController>
