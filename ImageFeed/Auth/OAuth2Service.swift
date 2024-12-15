@@ -19,9 +19,9 @@ final class OAuth2Service {
     }
     func fetchAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
         var components = URLComponents(string: "https://unsplash.com/oauth/token")
-        components?.queryItems = [URLQueryItem(name: "client_id", value: Constants.accessKey),
-                                  URLQueryItem(name: "client_secret", value: Constants.secretKey),
-                                  URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
+        components?.queryItems = [URLQueryItem(name: "client_id", value: accessKey),
+                                  URLQueryItem(name: "client_secret", value: secretKey),
+                                  URLQueryItem(name: "redirect_uri", value: redirectURI),
                                   URLQueryItem(name: "code", value: code),
                                   URLQueryItem(name: "grant_type", value: "authorization_code")]
         if let url = components?.url {
@@ -44,8 +44,8 @@ final class OAuth2Service {
     }
 }
 extension URLRequest {
-    static func makeHTTPRequest(path: String, httpMethod: String, baseURL: URL = Constants.defaultBaseURL) -> URLRequest {
-        var request = URLRequest(url: URL(string: path, relativeTo: baseURL) ?? Constants.defaultBaseURL)
+    static func makeHTTPRequest(path: String, httpMethod: String, baseURL: URL = defaultBaseURL) -> URLRequest {
+        var request = URLRequest(url: URL(string: path, relativeTo: baseURL) ?? defaultBaseURL)
         request.httpMethod = httpMethod
         return request
     }

@@ -16,10 +16,10 @@ class AuthViewController: UIViewController {
     weak var delegate: AuthViewControllerDelegate?
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == identifier {
-            guard
-                let webViewViewController = segue.destination as? WebViewViewController
-            else {
-                fatalError("Failed to prepare for \(identifier)") }
+            guard let webViewViewController = segue.destination as? WebViewViewController else {
+                assertionFailure("Failed to prepare for \(identifier)")
+                return
+            }
             webViewViewController.delegate = self
         } else {
             super.prepare(for: segue, sender: sender)
