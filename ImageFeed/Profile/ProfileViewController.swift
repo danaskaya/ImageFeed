@@ -6,23 +6,51 @@
 //
 
 import UIKit
+import Kingfisher
+import SwiftKeychainWrapper
 
 final class ProfileViewController: UIViewController {
+    private let logoutButton = UIButton()
     private let avatarImageView = UIImageView(image: UIImage(named: "avatar"))
     private let nameLabel = UILabel()
     private let loginNameLabel = UILabel()
     private let descriptionLabel = UILabel()
+    private let profileService = ProfileService.shared
+    private let profileImageService = ProfileImageService.shared
+    private let oauthTokenStorage = Oauth2TokenStorage.shared
+    private var profileImageServiceObserver: NSObjectProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(named: "YP Black")
         addAvatarImageView()
         addNameLabel()
         addLoginNameLabel()
         addDescriptionLabel()
         addLogoutButton()
+        updateProfileDetails(profile: profileService.profile)
+        profileImageServiceObserver = NotificationCenter.default
+            .addObserver(forName: ProfileImageService.didChangeNotification, object: nil, queue: .main) { [weak self] _ in
+                guard let self = self else { return }
+                self.updateAvatar()
+            }
+        updateAvatar()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    private func updateAvatar(){
+        guard let profileImageURL = profileImageService.avatarURL,
+              let url = URL(string: profileImageURL)
+        else { return }
+        avatarImageView.kf.indicatorType = .activity
+        let placeholderImage = UIImage(named: "placeholder")
+        avatarImageView.kf.setImage(with: url, placeholder: placeholderImage, options: [])
     }
     private func addAvatarImageView() {
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
+        avatarImageView.layer.masksToBounds = true
+        avatarImageView.layer.cornerRadius = 35
         view.addSubview(avatarImageView)
         NSLayoutConstraint.activate([
             avatarImageView.widthAnchor.constraint(equalToConstant: 70),
@@ -63,7 +91,6 @@ final class ProfileViewController: UIViewController {
     }
     
     private func addLogoutButton() {
-        let logoutButton = UIButton()
         logoutButton.setImage(UIImage(named: "logout_button"), for: .normal)
         logoutButton.tintColor = UIColor(named: "YP Red")
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
@@ -75,5 +102,17 @@ final class ProfileViewController: UIViewController {
             logoutButton.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor)
         ])
         
+    }
+    @objc func logoutButtonAction() {
+        oauthTokenStorage.removeKey()
+        print("key removed")
+    }
+}
+extension ProfileViewController {
+    func updateProfileDetails(profile: Profile?) {
+        guard let profile = profileService.profile else {return}
+        nameLabel.text = profile.name
+        loginNameLabel.text = profile.loginName
+        descriptionLabel.text = profile.bio
     }
 }
