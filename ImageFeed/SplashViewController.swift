@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ProgressHUD
 
 final class SplashViewController: UIViewController {
     private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
@@ -32,17 +33,17 @@ final class SplashViewController: UIViewController {
             }
         }
     }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor = UIColor(named: "YP Black")
         setNeedsStatusBarAppearanceUpdate()
     }
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        .lightContent
-    }
     
     private func setupSplash() {
-        let splashScreenLogo = UIImage(named:"auth_screen_logo")
+        let splashScreenLogo = UIImage(named: "auth_screen_logo")
         let imageView = UIImageView(image: splashScreenLogo)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -100,7 +101,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             guard let self = self else { return }
             switch result {
             case .success:
-                guard let username = profileService.profile?.userName else { return }
+                guard let username = profileService.profile?.username else { return }
                 profileImageService.fetchProfileImageURL(token: token, username: username) { _ in }
                 DispatchQueue.main.async {
                     self.switchToTabBarController()

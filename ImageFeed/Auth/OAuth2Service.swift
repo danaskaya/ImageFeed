@@ -7,10 +7,6 @@
 
 import Foundation
 
-enum AuthServiceError: Error {
-    case invalidRequest
-}
-
 final class OAuth2Service {
     static let shared = OAuth2Service()
     private let urlSession = URLSession.shared
@@ -58,13 +54,6 @@ final class OAuth2Service {
         }
     }
 }
-//extension URLRequest {
-//    static func makeHTTPRequest(path: String, httpMethod: String, baseURL: URL = defaultBaseURL) -> URLRequest {
-//        var request = URLRequest(url: URL(string: path, relativeTo: baseURL) ?? defaultBaseURL)
-//        request.httpMethod = httpMethod
-//        return request
-//    }
-//}
 extension OAuth2Service {
     private func object(for request: URLRequest, completion: @escaping (Result<OauthTokenResponseBody, Error>) -> Void) -> URLSessionTask {
         let decoder = JSONDecoder()

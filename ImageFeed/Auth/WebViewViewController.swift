@@ -16,7 +16,7 @@ protocol WebViewViewControllerDelegate: AnyObject {
 
 final class WebViewViewController: UIViewController {
     
-    @IBOutlet var webView: WKWebView!
+    @IBOutlet private var webView: WKWebView!
     @IBAction func didTapBackButton(_ sender: UIButton) {
         delegate?.webViewViewControllerDidCancel(self)
     }
@@ -36,14 +36,6 @@ final class WebViewViewController: UIViewController {
         webView.navigationDelegate = self
         loadWebView()
     }
-   
-   // override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-  //      if keyPath == #keyPath(WKWebView.estimatedProgress) {
- //           updateProgress()
- //       } else {
- //           super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
- //       }
- //   }
     
     private func updateProgress() {
         progressView.progress = Float(webView.estimatedProgress)

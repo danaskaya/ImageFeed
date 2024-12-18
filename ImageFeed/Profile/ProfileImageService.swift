@@ -37,8 +37,8 @@ final class ProfileImageService {
     }
     func makeRequest(token: String) -> URLRequest {
         var request: URLRequest?
-        if let userName = profileService.profile?.userName,
-           let url = URL(string: "https://api.unsplash.com/users/" + "\(userName)") {
+        if let username = profileService.profile?.username,
+           let url = URL(string: "https://api.unsplash.com/users/" + "\(username)") {
             request = URLRequest(url: url)
             request?.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         } else {

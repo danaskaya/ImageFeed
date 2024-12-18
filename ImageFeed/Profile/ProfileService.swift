@@ -52,10 +52,10 @@ final class ProfileService {
 }
 struct ProfileResult: Codable {
     let id: String
-    let userName, name, firstName, lastName: String
+    let username, name, firstName, lastName: String
     let bio: String?
     enum CodingKeys: String, CodingKey {
-        case id, userName, name
+        case id, username, name
         case firstName = "first_name"
         case lastName = "last_name"
         case bio
@@ -63,15 +63,15 @@ struct ProfileResult: Codable {
 }
 struct Profile: Codable {
     let id: String
-    let userName: String
+    let username: String
     let name: String
     let loginName: String
     let bio: String?
     init(data: ProfileResult) {
         self.id = data.id
-        self.userName = data.userName
+        self.username = data.username
         self.name = (data.firstName) + " " + (data.lastName)
-        self.loginName = "@" + data.userName
+        self.loginName = "@" + data.username
         self.bio = data.bio
     }
 }
