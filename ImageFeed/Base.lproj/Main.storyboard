@@ -92,7 +92,9 @@
                             <constraint firstItem="g5T-Pj-Giy" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="peR-Xt-Nzs"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="tab_editorial_active" id="uHG-Kz-noU" userLabel="Tab Bar Item"/>
                     <navigationItem key="navigationItem" id="w17-Ev-pfR"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="g5T-Pj-Giy" id="7ul-F6-yDs"/>
                         <segue destination="YC8-GR-DdS" kind="presentation" identifier="ShowSingleImage" id="y0N-hh-e5r"/>
@@ -109,7 +111,6 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OiE-25-TJ1">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="selectedImageTintColor" name="YP White"/>
                         <tabBarAppearance key="standardAppearance">
                             <color key="backgroundColor" name="YP Black"/>
@@ -331,6 +332,7 @@
         <image name="nav_back_button" width="24" height="24"/>
         <image name="nav_back_button_white" width="24" height="24"/>
         <image name="share_button" width="50" height="50"/>
+        <image name="tab_editorial_active" width="30" height="30"/>
         <namedColor name="YP Black">
             <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
