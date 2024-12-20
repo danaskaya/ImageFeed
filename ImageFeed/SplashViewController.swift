@@ -11,8 +11,8 @@ import ProgressHUD
 final class SplashViewController: UIViewController {
     private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
     
-    private let oauth2Service = OAuth2Service()
-    private let storage = Oauth2TokenStorage()
+    private let oauth2Service = OAuth2Service.shared
+    private let storage = Oauth2TokenStorage.shared
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
     weak var webViewVC: WebViewViewController?

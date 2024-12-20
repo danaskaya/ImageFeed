@@ -6,11 +6,13 @@
 //
 
 import Foundation
+
 final class ProfileService {
     static let shared = ProfileService()
     private let urlSession = URLSession.shared
     private var task: URLSessionTask?
     private (set) var profile: Profile?
+    private init(){}
     
     func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         assert(Thread.isMainThread)
@@ -52,7 +54,8 @@ final class ProfileService {
 }
 struct ProfileResult: Codable {
     let id: String
-    let username, name, firstName, lastName: String
+    let username, name, firstName: String
+    let lastName: String?
     let bio: String?
     enum CodingKeys: String, CodingKey {
         case id, username, name
@@ -70,7 +73,7 @@ struct Profile: Codable {
     init(data: ProfileResult) {
         self.id = data.id
         self.username = data.username
-        self.name = (data.firstName) + " " + (data.lastName)
+        self.name = (data.firstName) + " " + (data.lastName ?? " ")
         self.loginName = "@" + data.username
         self.bio = data.bio
     }
