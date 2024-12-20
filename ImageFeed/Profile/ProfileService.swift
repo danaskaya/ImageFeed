@@ -49,7 +49,7 @@ final class ProfileService {
                 completion(response)
             }
         }
-}
+    }
 struct ProfileResult: Codable {
     let id: String
     let username, name, firstName, lastName: String
