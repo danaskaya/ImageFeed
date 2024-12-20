@@ -42,7 +42,7 @@ final class ProfileImageService {
             request = URLRequest(url: url)
             request?.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         } else {
-             assertionFailure("Error of create URL")
+            assertionFailure("Error of create URL")
         }
         return request!
     }

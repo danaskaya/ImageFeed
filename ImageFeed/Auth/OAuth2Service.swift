@@ -14,11 +14,12 @@ final class OAuth2Service {
     private var lastCode: String?
     private (set) var authToken: String? {
         get {
-            return Oauth2TokenStorage().token
+            return Oauth2TokenStorage.shared.token
         } set {
-            Oauth2TokenStorage().token = newValue
+            Oauth2TokenStorage.shared.token = newValue
         }
     }
+    private init() {}
     func fetchAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
         if lastCode == code { return }

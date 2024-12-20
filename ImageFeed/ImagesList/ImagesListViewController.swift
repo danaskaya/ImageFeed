@@ -39,7 +39,7 @@ final class ImagesListViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SingleImageSegueIdentifier {
             if let viewController = segue.destination as? SingleImageViewController {
-               let indexPath = sender as! IndexPath
+                let indexPath = sender as! IndexPath
                 let photo = photos[indexPath.row]
                 guard let url = photo.largeImageURL,
                       let imageURL = URL(string: url) else { return }
@@ -125,7 +125,7 @@ extension ImagesListViewController: UITableViewDelegate {
         let aspectRatio = size.width / size.height
         return tableView.frame.width / aspectRatio
     }
-        
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard indexPath.row + 1 == imagesListService.photos.count else { return }
         imagesListService.fetchPhotosNextPage()

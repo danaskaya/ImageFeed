@@ -12,8 +12,8 @@ final class SplashViewController: UIViewController {
     
     private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
     
-    private let oauth2Service = OAuth2Service()
-    private let storage = Oauth2TokenStorage()
+    private let oauth2Service = OAuth2Service.shared
+    private let storage = Oauth2TokenStorage.shared
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
     weak var webViewVC: WebViewViewController?
@@ -31,9 +31,9 @@ final class SplashViewController: UIViewController {
                 assertionFailure("Failed to show Authentication Screen")
                 return
             }
-                authViewController.delegate = self
-                authViewController.modalPresentationStyle = .fullScreen
-                self.present(authViewController, animated: true)
+            authViewController.delegate = self
+            authViewController.modalPresentationStyle = .fullScreen
+            self.present(authViewController, animated: true)
         }
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -120,9 +120,9 @@ extension SplashViewController: AuthViewControllerDelegate {
     private func showAlert(with error: Error) {
         let alert = UIAlertController(title: "Что-то пошло не так(",
                                       message: "Не удалось войти в систему",
-                                          preferredStyle: .alert)
+                                      preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK",
-                                       style: .cancel))
+                                      style: .cancel))
         self.present(alert, animated: true) {
             self.tabBarController?.dismiss(animated: true)
             guard let window = UIApplication.shared.windows.first else {
