@@ -35,22 +35,22 @@ final class ProfileService {
         
     }
     
-        func makeRequest(token: String) -> URLRequest {
-            guard let url = URL(string: "https://api.unsplash.com" + "/me") else { fatalError("Error of create URL") }
-            var request = URLRequest(url: url)
-            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-            return request
-        }
-        
-        func object(for request: URLRequest, completion: @escaping (Result<ProfileResult, Error>) -> Void) -> URLSessionTask {
-            let decoder = JSONDecoder()
-            return urlSession.data(for: request) { result in
-                let response = result.flatMap { data -> Result<ProfileResult, Error> in
-                    Result { try decoder.decode(ProfileResult.self, from: data) }
-                }
-                completion(response)
+    func makeRequest(token: String) -> URLRequest {
+        guard let url = URL(string: "https://api.unsplash.com" + "/me") else { fatalError("Error of create URL") }
+        var request = URLRequest(url: url)
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        return request
+    }
+    
+    func object(for request: URLRequest, completion: @escaping (Result<ProfileResult, Error>) -> Void) -> URLSessionTask {
+        let decoder = JSONDecoder()
+        return urlSession.data(for: request) { result in
+            let response = result.flatMap { data -> Result<ProfileResult, Error> in
+                Result { try decoder.decode(ProfileResult.self, from: data) }
             }
+            completion(response)
         }
+    }
 }
 struct ProfileResult: Codable {
     let id: String
