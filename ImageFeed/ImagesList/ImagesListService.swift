@@ -20,6 +20,7 @@ final class ImagesListService {
     private var lastLoadedPage: Int = 0
     
     func fetchPhotosNextPage() {
+        print(photos.count)
         assert(Thread.isMainThread)
         guard task == nil else { return }
         page = lastLoadedPage == 0 ? 1 : lastLoadedPage + 1
@@ -110,22 +111,16 @@ final class ImagesListService {
         
     }
     func deleteLike(token: String, photoID: String) -> URLRequest? {
-        guard let baseURL = defaultBaseApiURL else {
-            return nil
-        }
         var request = URLRequest.makeHTTPRequest(path: "photos/\(photoID)/like",
                                                  httMethod: "DELETE",
-                                                 baseURL: baseURL)
+                                                 baseURL: AuthConfiguration.standart.defaultBaseApiURL)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         return request
     }
     func postLike(token: String, photoID: String) -> URLRequest? {
-        guard let baseURL = defaultBaseApiURL else {
-            return nil
-        }
         var request = URLRequest.makeHTTPRequest(path: "photos/\(photoID)/like",
                                                  httMethod: "POST",
-                                                 baseURL: baseURL)
+                                                 baseURL: AuthConfiguration.standart.defaultBaseApiURL)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         return request
     }
@@ -142,7 +137,7 @@ extension ImagesListService {
     }
 }
 extension URLRequest {
-    static func makeHTTPRequest (path: String, httMethod: String, baseURL: URL = defaultBaseURL) -> URLRequest {
+    static func makeHTTPRequest (path: String, httMethod: String, baseURL: URL = AuthConfiguration.standart.defaultBaseURL) -> URLRequest {
         var request = URLRequest(url: URL(string: path, relativeTo: baseURL)!)
         request.httpMethod = httMethod
         return request
