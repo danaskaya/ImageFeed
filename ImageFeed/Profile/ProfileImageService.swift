@@ -22,9 +22,9 @@ final class ProfileImageService {
             guard let self = self else {return}
             switch result {
             case .success(let body):
-                let avatarURL = body.profileImage.medium
-                self.avatarURL = avatarURL
-                completion(.success(self.avatarURL!))
+   //             let avatarURL = body.profileImage.medium
+  //              self.avatarURL = avatarURL
+                completion(.success(body.profileImage.medium))
                 NotificationCenter.default
                     .post(name: ProfileImageService.didChangeNotification,
                           object: self)
@@ -44,7 +44,9 @@ final class ProfileImageService {
         } else {
             assertionFailure("Error of create URL")
         }
-        return request!
+        if var request = request {
+            return request
+        } else {fatalError("Error of create request")}
     }
 }
 extension ProfileImageService {

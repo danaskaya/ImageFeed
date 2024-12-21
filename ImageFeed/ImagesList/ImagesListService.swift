@@ -113,9 +113,13 @@ final class ImagesListService {
         guard let baseURL = defaultBaseApiURL else {
             return nil
         }
-        var request = URLRequest.makeHTTPRequest(path: "photos/\(photoID)/like",
+        let request = URLRequest.makeHTTPRequest(path: "photos/\(photoID)/like",
                                                  httMethod: "DELETE",
                                                  baseURL: baseURL)
+        guard var request = request else {
+            print("Failed to make HTTP request")
+            return nil
+        }
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         return request
     }
@@ -126,6 +130,10 @@ final class ImagesListService {
         var request = URLRequest.makeHTTPRequest(path: "photos/\(photoID)/like",
                                                  httMethod: "POST",
                                                  baseURL: baseURL)
+        guard var request = request else {
+            print("Failed to make HTTP request")
+            return nil
+        }
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         return request
     }
@@ -142,8 +150,12 @@ extension ImagesListService {
     }
 }
 extension URLRequest {
-    static func makeHTTPRequest (path: String, httMethod: String, baseURL: URL = defaultBaseURL) -> URLRequest {
-        var request = URLRequest(url: URL(string: path, relativeTo: baseURL)!)
+    static func makeHTTPRequest (path: String, httMethod: String, baseURL: URL? = defaultBaseURL) -> URLRequest? {
+        guard let url = URL(string: path, relativeTo: baseURL) else {
+            assertionFailure("Failed to make url")
+            return nil
+        }
+        var request = URLRequest(url: url)
         request.httpMethod = httMethod
         return request
     }

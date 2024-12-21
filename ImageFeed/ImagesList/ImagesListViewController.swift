@@ -38,14 +38,18 @@ final class ImagesListViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SingleImageSegueIdentifier {
-            if let viewController = segue.destination as? SingleImageViewController {
-                let indexPath = sender as! IndexPath
+            guard
+                let viewController = segue.destination as? SingleImageViewController,
+                let indexPath = sender as? IndexPath
+            else {
+                assertionFailure("Invalid segue destination")
+                return
+            }
                 let photo = photos[indexPath.row]
                 guard let url = photo.largeImageURL,
                       let imageURL = URL(string: url) else { return }
                 viewController.imageURL = imageURL
-            }
-        } else {
+            } else {
             super.prepare(for: segue, sender: sender)
         }
     }

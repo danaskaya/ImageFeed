@@ -19,7 +19,7 @@ final class ImagesListCell: UITableViewCell {
         let like = isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
         likeButton.setImage(like, for: .normal)
     }
-    @IBAction func likeButtonClicked() {
+    @IBAction private func likeButtonClicked() {
         delegate?.imagesListCellDidTapLike(self)
     }
 }
