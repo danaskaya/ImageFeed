@@ -10,8 +10,8 @@ let AccessKey = "asukNu-NRmJw1QDuBxE2p3n70BXJ_dtOREY4iYXE7aI"
 let SecretKey = "J6Z7YMX24Pe5dEFjNJySLNBPaPqfpsKagwBdSyhGXJg"
 let RedirectURI = "urn:ietf:wg:oauth:2.0:oob"
 let AccessScope = "public+read_user+write_likes"
-let DefaultBaseURL = URL(string: "https://unsplash.com")!
-let DefaultBaseApiURL = URL(string: "https://api.unsplash.com")!
+let DefaultBaseURL = URL(string: "https://unsplash.com")
+let DefaultBaseApiURL = URL(string: "https://api.unsplash.com")
 let AuthURLString = "https://unsplash.com/oauth/authorize"
 struct AuthConfiguration {
     let accessKey: String
@@ -19,10 +19,10 @@ struct AuthConfiguration {
     let redirectURI: String
     let accessScope: String
     let authURLString: String
-    let defaultBaseURL: URL
-    let defaultBaseApiURL: URL
+    let defaultBaseURL: URL?
+    let defaultBaseApiURL: URL?
     
-    init(accessKey: String, secretKey: String, redirectURI: String, accessScope: String, authURLString: String, defaultBaseURL: URL, defaultBaseApiURL: URL) {
+    init(accessKey: String, secretKey: String, redirectURI: String, accessScope: String, authURLString: String, defaultBaseURL: URL?, defaultBaseApiURL: URL?) {
         self.accessKey = accessKey
         self.secretKey = secretKey
         self.redirectURI = redirectURI

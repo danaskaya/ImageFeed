@@ -23,16 +23,12 @@ final class Image_FeedUITests: XCTestCase {
         
         let loginTextField = webView.descendants(matching: .textField).element
         
-        XCTAssertTrue(loginTextField.waitForExistence(timeout: 3))
+        XCTAssertTrue(loginTextField.waitForExistence(timeout: 5))
         loginTextField.tap()
-        
-        sleep(2)
         
         loginTextField.typeText(yourEmail)
         
         app.buttons["Done"].tap()
-        
-        sleep(3)
         
         let passwordTextField = webView.descendants(matching: .secureTextField).element
         XCTAssertTrue(passwordTextField.waitForExistence(timeout: 3))
@@ -57,6 +53,7 @@ final class Image_FeedUITests: XCTestCase {
     
     func testFeed() throws {
         // тестируем сценарий ленты
+        
         sleep(5)
         
         let tableQuery = app.tables
@@ -87,7 +84,7 @@ final class Image_FeedUITests: XCTestCase {
         
         image.pinch(withScale: 0.5, velocity: -1)
         
-        let navBackButtonWhiteButton = app.buttons["back_button"]
+        let navBackButtonWhiteButton = app.buttons["nav back button white"]
         navBackButtonWhiteButton.tap()
     }
     

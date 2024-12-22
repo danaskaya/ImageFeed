@@ -22,7 +22,7 @@ class AuthHelper: AuthHelperProtocol {
                                   URLQueryItem(name: "redirect_uri", value: AuthConfiguration.standart.redirectURI),
                                   URLQueryItem(name: "response_type", value: "code"),
                                   URLQueryItem(name: "scope", value: AuthConfiguration.standart.accessScope)]
-        guard let url = components?.url else { return URL(string: "")! }
+        guard let url = components?.url else { fatalError("Error create url") }
         return  url
     }
     func authRequest() -> URLRequest {
