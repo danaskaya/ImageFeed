@@ -8,6 +8,7 @@
 import UIKit
 import Kingfisher
 import SwiftKeychainWrapper
+import WebKit
 
 final class ProfileViewController: UIViewController {
     private let logoutButton = UIButton()
@@ -35,9 +36,6 @@ final class ProfileViewController: UIViewController {
                 self.updateAvatar()
             }
         updateAvatar()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
     }
     private func updateAvatar(){
         guard let profileImageURL = profileImageService.avatarURL,
@@ -98,6 +96,7 @@ final class ProfileViewController: UIViewController {
         logoutButton.setImage(UIImage(systemName: "ipad.and.arrow.forward"), for: .normal)
         logoutButton.tintColor = UIColor(named: "YP Red")
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
+        logoutButton.addTarget(self, action: #selector(logoutButtonAction) , for: .touchUpInside)
         view.addSubview(logoutButton)
         NSLayoutConstraint.activate([
             logoutButton.widthAnchor.constraint(equalToConstant: 24),
@@ -107,9 +106,24 @@ final class ProfileViewController: UIViewController {
         ])
         
     }
-    @objc func logoutButtonAction() {
+    private func clean() {
+        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+            records.forEach { record in
+                WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+            }
+        }
+    }
+    private func logout()  {
         oauthTokenStorage.removeKey()
-        print("key removed")
+        clean()
+        tabBarController?.dismiss(animated: true)
+        guard let window = UIApplication.shared.windows.first else {
+            fatalError("error") }
+        window.rootViewController = SplashViewController()
+    }
+    @objc func logoutButtonAction() {
+        showAlert()
     }
 }
 extension ProfileViewController {
@@ -118,5 +132,22 @@ extension ProfileViewController {
         nameLabel.text = profile.name
         loginNameLabel.text = profile.loginName
         descriptionLabel.text = profile.bio
+    }
+    private func showAlert() {
+        let alert = UIAlertController(
+            title: "До встречи!",
+            message: "Уверены, что хотите выйти?",
+            preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Нет",
+                                      style: .cancel))
+        
+        alert.addAction(UIAlertAction(title: "Да",
+                                      style: .default, handler: { [weak self] _ in
+            guard let self = self else { return }
+            logout()
+        }))
+        
+        self.present(alert, animated: true)
     }
 }

@@ -19,7 +19,7 @@ final class OAuth2Service {
             Oauth2TokenStorage.shared.token = newValue
         }
     }
-    private init() {}
+
     func fetchAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
         if lastCode == code { return }
@@ -52,17 +52,6 @@ final class OAuth2Service {
             }
             self.task = task
             task.resume()
-        }
-    }
-}
-extension OAuth2Service {
-    private func object(for request: URLRequest, completion: @escaping (Result<OauthTokenResponseBody, Error>) -> Void) -> URLSessionTask {
-        let decoder = JSONDecoder()
-        return urlSession.data(for: request) { result in
-            let response = result.flatMap { data -> Result<OauthTokenResponseBody, Error> in
-                Result { try decoder.decode(OauthTokenResponseBody.self, from: data) }
-            }
-            completion(response)
         }
     }
 }

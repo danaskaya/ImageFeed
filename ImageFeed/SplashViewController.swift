@@ -9,6 +9,7 @@ import UIKit
 import ProgressHUD
 
 final class SplashViewController: UIViewController {
+    
     private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
     
     private let oauth2Service = OAuth2Service.shared
@@ -16,21 +17,23 @@ final class SplashViewController: UIViewController {
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
     weak var webViewVC: WebViewViewController?
+    private let imagesListService = ImagesListService.shared
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupSplash()
-        
+        guard UIBlockingProgressHUD.isShowing == false else { return }
         if (storage.token != nil) {
             guard let token = storage.token else {return}
             fetchProfile(token: token)
         } else {
-            let storyboard = UIStoryboard(name: "Main", bundle: .main)
-            if let authViewController = storyboard.instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController {
-                authViewController.delegate = self
-                authViewController.modalPresentationStyle = .fullScreen
-                self.present(authViewController, animated: true)
+            guard let authViewController = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController else {
+                assertionFailure("Failed to show Authentication Screen")
+                return
             }
+            authViewController.delegate = self
+            authViewController.modalPresentationStyle = .fullScreen
+            self.present(authViewController, animated: true)
         }
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -117,10 +120,16 @@ extension SplashViewController: AuthViewControllerDelegate {
     private func showAlert(with error: Error) {
         let alert = UIAlertController(title: "Что-то пошло не так(",
                                       message: "Не удалось войти в систему",
-                                          preferredStyle: .alert)
+                                      preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK",
-                                       style: .cancel))
-        self.present(alert, animated: true, completion: nil)
+                                      style: .cancel))
+        self.present(alert, animated: true) {
+            self.tabBarController?.dismiss(animated: true)
+            guard let window = UIApplication.shared.windows.first else {
+                fatalError("error")
+            }
+            window.rootViewController = SplashViewController()
+        }
     }
 }
 
