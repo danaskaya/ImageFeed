@@ -89,6 +89,10 @@ final class ProfileViewController: UIViewController {
     }
     
     private func addLogoutButton() {
+<<<<<<< HEAD
+        let logoutButton = UIButton()
+=======
+>>>>>>> sprint_11
         logoutButton.setImage(UIImage(systemName: "ipad.and.arrow.forward"), for: .normal)
         logoutButton.tintColor = UIColor(named: "YP Red")
         logoutButton.translatesAutoresizingMaskIntoConstraints = false

@@ -14,6 +14,7 @@ final class ProfileImageService {
     private var task: URLSessionTask?
     private (set) var avatarURL: String?
     private let profileService = ProfileService.shared
+    private init(){}
     
     func fetchProfileImageURL(token: String, username: String, _ completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
