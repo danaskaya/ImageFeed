@@ -57,7 +57,7 @@ final class Image_FeedUITests: XCTestCase {
         
         let tableQuery = app.tables
         let cell = tableQuery.descendants(matching: .cell).element(boundBy: 0)
-        cell.swipeDown()
+        cell.swipeUp()
         
         sleep(2)
         let cellLike = tableQuery.descendants(matching: .cell).element(boundBy: 1)

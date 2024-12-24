@@ -22,11 +22,11 @@ final class WebViewTests: XCTestCase {
     func testPresenterCallsLoadRequest() {
         //given
         
-        let viewControlelr = WebViewViewControllerSpy()
+        let viewController = WebViewViewControllerSpy()
         let authHelper = AuthHelper()
         let presenter  = WebViewPresenter(authHelper: authHelper)
-        viewControlelr.presenter = presenter
-        presenter.view = viewControlelr
+        viewController.presenter = presenter
+        presenter.view = viewController
         
         //when
         
@@ -34,7 +34,7 @@ final class WebViewTests: XCTestCase {
         
         //then
         
-        XCTAssertTrue(viewControlelr.loadRequestCalled)
+        XCTAssertTrue(viewController.loadRequestCalled)
     }
     func testProgressVisibleWhenLessThenOne() {
         //given
@@ -60,11 +60,11 @@ final class WebViewTests: XCTestCase {
         
         //when
         
-        let shouldHidePRogress = presenter.shouldHideProgress(for: progress)
+        let shouldHideProgress = presenter.shouldHideProgress(for: progress)
         
         //then
         
-        XCTAssertTrue(shouldHidePRogress)
+        XCTAssertTrue(shouldHideProgress)
         
     }
     
