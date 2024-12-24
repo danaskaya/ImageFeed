@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 protocol ImageListViewPresenterProtocol {
     var view: ImageListViewControllerProtocol? { get set }
     var photos: [Photo] { get set }

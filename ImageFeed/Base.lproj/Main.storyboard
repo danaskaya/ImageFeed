@@ -211,7 +211,7 @@
                                 <rect key="frame" x="16" y="680" width="361" height="48"/>
                                 <color key="backgroundColor" name="YP White"/>
                                 <accessibility key="accessibilityConfiguration" identifier="Authenticate">
-                                    <bool key="isElement" value="NO"/>
+                                    <bool key="isElement" value="YES"/>
                                 </accessibility>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="mWG-SN-Y2E"/>

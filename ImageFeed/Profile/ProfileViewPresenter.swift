@@ -6,6 +6,7 @@
 //
 
 import WebKit
+
 protocol ProfileViewPresenterProtocol {
     func makeAlert() -> UIAlertController
     func viewDidLoad()
@@ -24,7 +25,12 @@ final class ProfileViewPresenter: ProfileViewPresenterProtocol {
     func fetchProfileURL() -> URL {
         guard let profileImageURL = ProfileImageService.shared.avatarURL,
               let url = URL(string: profileImageURL)
-        else { return URL(string: "")! }
+        else {
+            guard var emptyurl = URL(string: "") else {
+                fatalError("Error of create emptyurl")
+            }
+            return emptyurl
+        }
         return url
     }
     func observeAvatar() {

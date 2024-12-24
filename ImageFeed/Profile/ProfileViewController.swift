@@ -25,15 +25,6 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
     var presenter: ProfileViewPresenterProtocol = {
         return ProfileViewPresenter()
     }()
-//    private let logoutButton = UIButton()
-//    private let avatarImageView = UIImageView(image: UIImage(named: "avatar"))
-//    private let nameLabel = UILabel()
-//    private let loginNameLabel = UILabel()
-//    private let descriptionLabel = UILabel()
-//    private let profileService = ProfileService.shared
-//    private let profileImageService = ProfileImageService.shared
-//    private let oauthTokenStorage = Oauth2TokenStorage.shared
-//    private var profileImageServiceObserver: NSObjectProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()

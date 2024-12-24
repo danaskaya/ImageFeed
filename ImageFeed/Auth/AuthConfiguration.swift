@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 let AccessKey = "asukNu-NRmJw1QDuBxE2p3n70BXJ_dtOREY4iYXE7aI"
 let SecretKey = "J6Z7YMX24Pe5dEFjNJySLNBPaPqfpsKagwBdSyhGXJg"
 let RedirectURI = "urn:ietf:wg:oauth:2.0:oob"
@@ -22,7 +23,14 @@ struct AuthConfiguration {
     let defaultBaseURL: URL?
     let defaultBaseApiURL: URL?
     
-    init(accessKey: String, secretKey: String, redirectURI: String, accessScope: String, authURLString: String, defaultBaseURL: URL?, defaultBaseApiURL: URL?) {
+    init(
+        accessKey: String,
+        secretKey: String,
+        redirectURI: String,
+        accessScope: String,
+        authURLString: String,
+        defaultBaseURL: URL?,
+        defaultBaseApiURL: URL?) {
         self.accessKey = accessKey
         self.secretKey = secretKey
         self.redirectURI = redirectURI

@@ -15,10 +15,9 @@ final class Image_FeedUITests: XCTestCase {
     
     func testAuth() throws {
         // тестируем сценарий авторизации
+        sleep(3)
         app.buttons["Authenticate"].tap()
-        
         let webView = app.webViews["UnsplashWebView"]
-        
         XCTAssertTrue(webView.waitForExistence(timeout: 5))
         
         let loginTextField = webView.descendants(matching: .textField).element
@@ -63,13 +62,13 @@ final class Image_FeedUITests: XCTestCase {
         sleep(2)
         let cellLike = tableQuery.descendants(matching: .cell).element(boundBy: 1)
         
-        let likebutton = cellLike.descendants(matching: .button).element(boundBy: 0)
+        let likeButton = cellLike.descendants(matching: .button).element(boundBy: 0)
         
-        likebutton.tap()
+        likeButton.tap()
         
         sleep(2)
         
-        likebutton.tap()
+        likeButton.tap()
         
         sleep(2)
         
@@ -102,6 +101,8 @@ final class Image_FeedUITests: XCTestCase {
         sleep(2)
         
         app.alerts["До встречи!"].scrollViews.otherElements.buttons["Да"].tap()
+        sleep(2)
+        XCTAssertTrue(app.buttons["Authenticate"].exists)
     }
 }
 

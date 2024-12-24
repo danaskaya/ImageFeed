@@ -56,11 +56,11 @@ final class ImagesListViewController: UIViewController & ImageListViewController
                 assertionFailure("Invalid segue destination")
                 return
             }
-                let photo = presenter.photos[indexPath.row]
-                guard let url = photo.largeImageURL,
-                      let imageURL = URL(string: url) else { return }
-                viewController.imageURL = imageURL
-            } else {
+            let photo = presenter.photos[indexPath.row]
+            guard let url = photo.largeImageURL,
+                  let imageURL = URL(string: url) else { return }
+            viewController.imageURL = imageURL
+        } else {
             super.prepare(for: segue, sender: sender)
         }
     }

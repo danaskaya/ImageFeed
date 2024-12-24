@@ -8,6 +8,7 @@
 import Foundation
 import XCTest
 @testable import ImageFeed
+
 final class ImageListTests: XCTestCase {
     func testImageListVidDidLoadCalled(){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -60,15 +61,9 @@ final class ImageListViewControllerSpy: ImageListViewControllerProtocol {
     }
     
     func updateTableViewAnimate() {
-    
+        
     }
-
 }
-
-
-
-
-
 final class ImageListViewPresenterSpy: ImageListViewPresenterProtocol {
     var photos: [Photo] = []
     var viewDidLoadCalled = false
@@ -94,7 +89,4 @@ final class ImageListViewPresenterSpy: ImageListViewPresenterProtocol {
     func observeAnimate() {
         observe = true
     }
-    
-    
 }
-

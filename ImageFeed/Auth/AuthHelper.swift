@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 protocol AuthHelperProtocol {
     func authRequest() -> URLRequest
     func code(form url: URL) -> String?
@@ -23,7 +24,7 @@ class AuthHelper: AuthHelperProtocol {
                                   URLQueryItem(name: "response_type", value: "code"),
                                   URLQueryItem(name: "scope", value: AuthConfiguration.standart.accessScope)]
         guard let url = components?.url else { fatalError("Error create url") }
-        return  url
+        return url
     }
     func authRequest() -> URLRequest {
         let url = authURL()

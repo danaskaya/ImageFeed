@@ -8,6 +8,7 @@
 import Foundation
 @testable import ImageFeed
 import XCTest
+
 final class ProfileTests: XCTestCase {
     func testProfileVCCallsViewDidLoad() {
         //given
@@ -58,7 +59,7 @@ final class ProfileTests: XCTestCase {
         XCTAssertTrue(presenter.cleanData)
     }
     
-    func testFetchinProfileURL() {
+    func testFetchingProfileURL() {
         //given
         
         let presenter = ProfileViewPresenterSpy(profileService: ProfileService.shared)

@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+
 final class ProfileImageService {
     static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
     static let shared = ProfileImageService()
