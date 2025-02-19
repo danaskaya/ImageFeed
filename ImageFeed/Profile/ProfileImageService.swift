@@ -15,6 +15,7 @@ final class ProfileImageService {
     private var task: URLSessionTask?
     private (set) var avatarURL: String?
     private let profileService = ProfileService.shared
+    private init(){}
     
     func fetchProfileImageURL(token: String, username: String, _ completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
@@ -23,9 +24,8 @@ final class ProfileImageService {
             guard let self = self else {return}
             switch result {
             case .success(let body):
-                let avatarURL = body.profileImage.medium
-                self.avatarURL = avatarURL
-                completion(.success(self.avatarURL!))
+
+                completion(.success(body.profileImage.medium))
                 NotificationCenter.default
                     .post(name: ProfileImageService.didChangeNotification,
                           object: self)
@@ -48,6 +48,7 @@ final class ProfileImageService {
         if var request = request {
             return request
         } else { fatalError("Error of create request") }
+
     }
 }
 extension ProfileImageService {

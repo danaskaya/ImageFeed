@@ -69,7 +69,6 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
         avatarImageView.layer.cornerRadius = 35
         return avatarImageView
     }()
-    
     var nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false

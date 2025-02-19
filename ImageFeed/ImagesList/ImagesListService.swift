@@ -124,7 +124,9 @@ final class ImagesListService {
     func postLike(token: String, photoID: String) -> URLRequest? {
         var request = URLRequest.makeHTTPRequest(path: "photos/\(photoID)/like",
                                                  httMethod: "POST",
+
                                                  baseURL: AuthConfiguration.standart.defaultBaseApiURL)
+
         guard var request = request else {
             print("Failed to make HTTP request")
             return nil
@@ -146,6 +148,7 @@ extension ImagesListService {
 }
 extension URLRequest {
     static func makeHTTPRequest (path: String, httMethod: String, baseURL: URL? = AuthConfiguration.standart.defaultBaseURL) -> URLRequest? {
+
         guard let url = URL(string: path, relativeTo: baseURL) else {
             assertionFailure("Failed to make url")
             return nil

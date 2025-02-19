@@ -19,7 +19,7 @@ final class OAuth2Service {
             Oauth2TokenStorage.shared.token = newValue
         }
     }
-    private init() {}
+
     func fetchAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
         if lastCode == code { return }
@@ -55,7 +55,6 @@ final class OAuth2Service {
         }
     }
 }
-
 extension URLSession {
     func data(
         for request: URLRequest,
