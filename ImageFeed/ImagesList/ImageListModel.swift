@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct Photo: Codable {
     let id: String
     let size: CGSize

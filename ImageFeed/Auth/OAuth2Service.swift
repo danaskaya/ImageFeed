@@ -26,9 +26,9 @@ final class OAuth2Service {
         task?.cancel()
         lastCode = code
         var components = URLComponents(string: "https://unsplash.com/oauth/token")
-        components?.queryItems = [URLQueryItem(name: "client_id", value: accessKey),
-                                  URLQueryItem(name: "client_secret", value: secretKey),
-                                  URLQueryItem(name: "redirect_uri", value: redirectURI),
+        components?.queryItems = [URLQueryItem(name: "client_id", value: AuthConfiguration.standart.accessKey),
+                                  URLQueryItem(name: "client_secret", value: AuthConfiguration.standart.secretKey),
+                                  URLQueryItem(name: "redirect_uri", value: AuthConfiguration.standart.redirectURI),
                                   URLQueryItem(name: "code", value: code),
                                   URLQueryItem(name: "grant_type", value: "authorization_code")]
         if let url = components?.url {

@@ -20,6 +20,7 @@ final class ImagesListService {
     private var lastLoadedPage: Int = 0
     
     func fetchPhotosNextPage() {
+        print(photos.count)
         assert(Thread.isMainThread)
         guard task == nil else { return }
         page = lastLoadedPage == 0 ? 1 : lastLoadedPage + 1
@@ -110,12 +111,9 @@ final class ImagesListService {
         
     }
     func deleteLike(token: String, photoID: String) -> URLRequest? {
-        guard let baseURL = defaultBaseApiURL else {
-            return nil
-        }
-        let request = URLRequest.makeHTTPRequest(path: "photos/\(photoID)/like",
+        var request = URLRequest.makeHTTPRequest(path: "photos/\(photoID)/like",
                                                  httMethod: "DELETE",
-                                                 baseURL: baseURL)
+                                                 baseURL: AuthConfiguration.standart.defaultBaseApiURL)
         guard var request = request else {
             print("Failed to make HTTP request")
             return nil
@@ -124,12 +122,11 @@ final class ImagesListService {
         return request
     }
     func postLike(token: String, photoID: String) -> URLRequest? {
-        guard let baseURL = defaultBaseApiURL else {
-            return nil
-        }
         var request = URLRequest.makeHTTPRequest(path: "photos/\(photoID)/like",
                                                  httMethod: "POST",
-                                                 baseURL: baseURL)
+
+                                                 baseURL: AuthConfiguration.standart.defaultBaseApiURL)
+
         guard var request = request else {
             print("Failed to make HTTP request")
             return nil
@@ -150,7 +147,8 @@ extension ImagesListService {
     }
 }
 extension URLRequest {
-    static func makeHTTPRequest (path: String, httMethod: String, baseURL: URL? = defaultBaseURL) -> URLRequest? {
+    static func makeHTTPRequest (path: String, httMethod: String, baseURL: URL? = AuthConfiguration.standart.defaultBaseURL) -> URLRequest? {
+
         guard let url = URL(string: path, relativeTo: baseURL) else {
             assertionFailure("Failed to make url")
             return nil

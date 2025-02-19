@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+
 final class ProfileImageService {
     static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
     static let shared = ProfileImageService()
@@ -46,7 +47,8 @@ final class ProfileImageService {
         }
         if var request = request {
             return request
-        } else {fatalError("Error of create request")}
+        } else { fatalError("Error of create request") }
+
     }
 }
 extension ProfileImageService {
